@@ -14,4 +14,8 @@ export const Layout = styled.main`
     border: 1px solid;
     border-color: ${(props) => props.theme.colors.olive6};
     border-radius: 5px;
+
+    footer {
+        margin-top: auto;
+    }
 `;
