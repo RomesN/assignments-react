@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { Layout } from "./Layout";
 import { List } from "./List";
 import { Header } from "./Header";
@@ -5,13 +6,17 @@ import { Footer } from "./Footer";
 import { useGetItems } from "./api/items";
 import { ListItem } from "./ListItem";
 
+export const LoadingInfo = styled.p`
+    margin-top: 1.6rem;
+`;
+
 export const ToDoItems = () => {
     const { data: items, isFetching, isSuccess } = useGetItems();
 
     return (
         <Layout>
             <Header onItemAdd={() => console.warn("unimplemented")}>To Do app</Header>
-            {isFetching && <p>Loading data...</p>}
+            {isFetching && <LoadingInfo>Loading data...</LoadingInfo>}
             {isSuccess && (
                 <List>
                     {items.map((itm) => (
