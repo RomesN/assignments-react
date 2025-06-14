@@ -3,7 +3,7 @@ import { Layout } from "./Layout";
 import { List } from "./List";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { useGetItems } from "./api/items";
+import { useAddItem, useGetItems } from "./api/items";
 import { ListItem } from "./ListItem";
 
 export const LoadingInfo = styled.p`
@@ -12,10 +12,11 @@ export const LoadingInfo = styled.p`
 
 export const ToDoItems = () => {
     const { data: items, isFetching, isSuccess } = useGetItems();
+    const { mutate: addItem } = useAddItem();
 
     return (
         <Layout>
-            <Header onItemAdd={() => console.warn("unimplemented")}>To Do app</Header>
+            <Header onItemAdd={addItem}>To Do app</Header>
             {isFetching && <LoadingInfo>Loading data...</LoadingInfo>}
             {isSuccess && (
                 <List>

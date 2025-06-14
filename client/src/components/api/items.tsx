@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ToDoItem } from "../types/item";
 
 export const itemsDao = axios.create({
@@ -20,3 +20,25 @@ export const getItems = async () => {
 };
 
 export const useGetItems = () => useQuery({ queryKey: [TODO_LIST_KEY], queryFn: getItems });
+
+export const addItem = async (label: string) => {
+    return await itemsDao
+        .post<ToDoItem>("/", {
+            label,
+            isDone: false,
+        })
+        .then((respone) => respone.data)
+        .catch((error) => {
+            console.error("Error saving item:", error);
+            throw new Error("Unable to save item. Please try again later.");
+        });
+};
+
+export const useAddItem = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: addItem,
+        onSuccess: (itm) => queryClient.setQueryData([TODO_LIST_KEY], (items: Array<ToDoItem>) => [...items, itm]),
+    });
+};
