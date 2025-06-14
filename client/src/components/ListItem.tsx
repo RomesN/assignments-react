@@ -7,6 +7,13 @@ import { Checkbox } from "./Checkbox";
 const StyledDiv = styled.div`
     display: flex;
     align-items: center;
+    gap: 8px;
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 const Label = styled.label`

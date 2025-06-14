@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const FooterStyled = styled.footer`
     display: flex;
+    gap: 8px;
 
     margin-top: 15px;
     padding-top: 15px;
@@ -10,6 +11,8 @@ const FooterStyled = styled.footer`
     border-top: 1px solid;
     border-color: ${(props) => props.theme.colors.olive6};
 `;
+
+const FooterItem = styled.span``;
 
 type FooterProps = {
     todoItems?: number;
@@ -21,8 +24,8 @@ export const Footer = (props: FooterProps) => {
 
     return (
         <FooterStyled>
-            Todo: {todoItems ?? 0}
-            Done: {todoItems ?? 0}
+            <FooterItem>Todo: {todoItems ?? 0}</FooterItem>
+            <FooterItem>Done: {doneItems ?? 0}</FooterItem>
         </FooterStyled>
     );
 };

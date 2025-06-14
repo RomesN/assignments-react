@@ -5,8 +5,15 @@ import styled from "styled-components";
 const StyledDiv = styled.header`
     display: flex;
 
+    gap: 8px;
+    align-items: center;
+
     button {
         all: unset;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         width: 25px;
         height: 25px;
