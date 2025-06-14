@@ -1,18 +1,22 @@
 import { Container } from "./components/Container";
-import { Layout } from "./components/Layout";
-import { List } from "./components/List";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
 import { ThemeProvider } from "./components/providers/ThemeProvider";
+import { ConfiguredQueryClientProvider } from "./components/providers/ConfiguredQueryClientProvider";
+import { AppErrorsProvider } from "./components/providers/AppErrorsProvider";
+import { GlobalErrorsDisplay } from "./components/GlobalErrorsDisplay";
+import { ToDoItems } from "./components/ToDoItems";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 export const App = () => (
     <ThemeProvider>
-        <Container>
-            <Layout>
-                <Header onItemAdd={() => console.warn("unimplemented")}>To Do app</Header>
-                <List />
-                <Footer />
-            </Layout>
-        </Container>
+        <AppErrorsProvider>
+            <ConfiguredQueryClientProvider>
+                <Container>
+                    <GlobalErrorsDisplay />
+                    <ErrorBoundary>
+                        <ToDoItems />
+                    </ErrorBoundary>
+                </Container>
+            </ConfiguredQueryClientProvider>
+        </AppErrorsProvider>
     </ThemeProvider>
 );
