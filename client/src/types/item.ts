@@ -3,4 +3,5 @@ export type ToDoItem = {
     label: string;
     isDone: boolean;
     createdAt: number;
+    finishedAt?: number;
 };

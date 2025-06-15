@@ -67,6 +67,29 @@ export const useEditItem = () => {
     });
 };
 
+export const finishItem = async (id: number) => {
+    return await itemsDao
+        .post<ToDoItem>(`/${id}/finish`)
+        .then((respone) => respone.data)
+        .catch((error) => {
+            console.error("Error finishing item:", error);
+            throw new Error(`Unable to finish item with id ${id}.`);
+        });
+};
+
+export const useUpdateIsDone = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (updatedItem: ToDoItem) =>
+            updatedItem.isDone ? finishItem(updatedItem.id) : editItem({ ...updatedItem, finishedAt: undefined }),
+        onSuccess: (updatedItem) =>
+            queryClient.setQueryData([TODO_LIST_KEY], (items: Array<ToDoItem>) =>
+                items.map((item) => (item.id === updatedItem.id ? updatedItem : item)).sort(sortCallback)
+            ),
+    });
+};
+
 export const deleteItem = async (id: number) => {
     return await itemsDao.delete<ToDoItem>(`/${id}`).catch((error) => {
         console.error("Error deleting item:", error);
