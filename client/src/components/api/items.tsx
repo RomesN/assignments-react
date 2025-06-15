@@ -42,3 +42,25 @@ export const useAddItem = () => {
         onSuccess: (itm) => queryClient.setQueryData([TODO_LIST_KEY], (items: Array<ToDoItem>) => [...items, itm]),
     });
 };
+
+export const editItem = async (editedTodo: ToDoItem) => {
+    return await itemsDao
+        .patch<ToDoItem>(`/${editedTodo.id}`, editedTodo)
+        .then((respone) => respone.data)
+        .catch((error) => {
+            console.error("Error saving item:", error);
+            throw new Error(`Unable to edit item with id ${editedTodo.id}. Please try again later.`);
+        });
+};
+
+export const useEditItem = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (editedTodo: ToDoItem) => editItem(editedTodo),
+        onSuccess: (updatedItem) =>
+            queryClient.setQueryData([TODO_LIST_KEY], (items: Array<ToDoItem>) =>
+                items.map((item) => (item.id === updatedItem.id ? updatedItem : item))
+            ),
+    });
+};

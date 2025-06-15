@@ -1,7 +1,7 @@
-import { useCallback, useState } from "react";
 import { PlusIcon } from "@radix-ui/react-icons";
 import styled from "styled-components";
 import { Form } from "./form";
+import { useFormToggle } from "./hooks/useFormToggle";
 
 const StyledDiv = styled.header`
     display: flex;
@@ -34,22 +34,15 @@ type HeaderProps = {
 };
 
 export const Header = ({ children, onItemAdd }: HeaderProps) => {
-    const [isFormOpen, setIsFormOpen] = useState(false);
-
-    const handleAddClick = () => setIsFormOpen(true);
-    const handleSubmit = useCallback((label: string) => {
-        onItemAdd(label);
-        setIsFormOpen(false);
-    }, []);
-    const handleCancel = useCallback(() => setIsFormOpen(false), []);
+    const { isFormOpen, handleOpenForm, handleCloseForm, handleSubmitForm } = useFormToggle(onItemAdd);
 
     return (
         <StyledDiv>
             <h1>{children}</h1>
             {isFormOpen ? (
-                <Form onSubmit={handleSubmit} onCancel={handleCancel} initialValue="" />
+                <Form onSubmit={handleSubmitForm} onCancel={handleCloseForm} initialValue="" />
             ) : (
-                <button aria-label="Add item" onClick={handleAddClick}>
+                <button aria-label="Add item" onClick={handleOpenForm}>
                     <PlusIcon />
                 </button>
             )}
