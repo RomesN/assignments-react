@@ -14,6 +14,16 @@ const StyledDiv = styled.div`
     label {
         margin-right: auto;
     }
+
+    button:not([type]) {
+        visibility: hidden;
+    }
+
+    &:hover {
+        button:not([type]) {
+            visibility: visible;
+        }
+    }
 `;
 
 const Label = styled.label`
