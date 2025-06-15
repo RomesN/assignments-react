@@ -57,10 +57,29 @@ export const useEditItem = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (editedTodo: ToDoItem) => editItem(editedTodo),
+        mutationFn: editItem,
         onSuccess: (updatedItem) =>
             queryClient.setQueryData([TODO_LIST_KEY], (items: Array<ToDoItem>) =>
                 items.map((item) => (item.id === updatedItem.id ? updatedItem : item))
+            ),
+    });
+};
+
+export const deleteItem = async (id: number) => {
+    return await itemsDao.delete<ToDoItem>(`/${id}`).catch((error) => {
+        console.error("Error deleting item:", error);
+        throw new Error(`Unable to delete item with id ${id}. Please try again later.`);
+    });
+};
+
+export const useDeleteItem = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (id: number) => deleteItem(id).then(() => id),
+        onSuccess: (id) =>
+            queryClient.setQueryData([TODO_LIST_KEY], (items: Array<ToDoItem>) =>
+                items.filter((item) => item.id !== id)
             ),
     });
 };
