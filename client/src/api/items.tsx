@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ToDoItem } from "../types/item";
-import { sortCallback } from "../utils/sorting";
+import { sortCallback } from "../utils/itemsUtils";
 
 export const itemsDao = axios.create({
     baseURL: `${import.meta.env.VITE_REACT_APP_BACKEND_BASE_URL}/items`,

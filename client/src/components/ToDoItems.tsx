@@ -5,6 +5,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { useAddItem, useDeleteItem, useEditItem, useGetItems } from "../api/items";
 import { ListItem } from "./ListItem";
+import { getCounts } from "../utils/itemsUtils";
 
 export const LoadingInfo = styled.p`
     margin-top: 1.6rem;
@@ -15,6 +16,7 @@ export const ToDoItems = () => {
     const { mutate: addItem } = useAddItem();
     const { mutate: editItem } = useEditItem();
     const { mutate: deleteItem } = useDeleteItem();
+    const counts = getCounts(items);
 
     return (
         <Layout>
@@ -34,7 +36,7 @@ export const ToDoItems = () => {
                     ))}
                 </List>
             )}
-            <Footer />
+            <Footer todoItems={counts.todoItems} doneItems={counts.doneItems} />
         </Layout>
     );
 };
