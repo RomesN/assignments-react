@@ -17,6 +17,7 @@ export const Input = (props: InputProps) => {
                 const value = e.currentTarget.value;
                 onValueChange(value);
             }}
+            autoFocus
         />
     );
 };

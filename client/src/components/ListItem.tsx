@@ -2,8 +2,8 @@ import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import styled from "styled-components";
 
 import { Checkbox } from "./Checkbox";
-import { Form } from "./form";
 import { Button } from "./Button";
+import { ToggleableForm } from "./ToggleableForm";
 import { useFormToggle } from "../hooks/useFormToggle";
 
 const StyledDiv = styled.div`
@@ -49,13 +49,15 @@ export const ListItem = (props: LiteeItemProp) => {
             <Button onClick={() => onItemDelete()}>
                 <TrashIcon />
             </Button>
-            {isFormOpen ? (
-                <Form initialValue={props.label} onSubmit={handleSubmitForm} onCancel={handleCloseForm} />
-            ) : (
-                <Button onClick={handleOpenForm}>
-                    <Pencil1Icon />
-                </Button>
-            )}
+            <ToggleableForm
+                isFormOpen={isFormOpen}
+                onClickOpen={handleOpenForm}
+                initialValue={label}
+                onSubmit={handleSubmitForm}
+                onCancel={handleCloseForm}
+            >
+                <Pencil1Icon />
+            </ToggleableForm>
         </StyledDiv>
     );
 };

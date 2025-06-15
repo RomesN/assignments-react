@@ -30,7 +30,7 @@ const ButtonStyled = styled.button<{ $primary?: boolean }>`
     justify-content: center;
     align-items: center;
 
-    &:hover {
+    &:hover:enabled {
         cursor: pointer;
     }
 

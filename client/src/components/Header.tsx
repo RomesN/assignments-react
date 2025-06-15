@@ -1,8 +1,8 @@
 import { PlusIcon } from "@radix-ui/react-icons";
 import styled from "styled-components";
 import { useFormToggle } from "../hooks/useFormToggle";
-import { Form } from "./form";
-import { Button, getPrimaryButtonStyle } from "./Button";
+import { getPrimaryButtonStyle } from "./Button";
+import { ToggleableForm } from "./ToggleableForm";
 
 const StyledDiv = styled.header`
     display: flex;
@@ -27,13 +27,16 @@ export const Header = ({ children, onItemAdd }: HeaderProps) => {
     return (
         <StyledDiv>
             <h1>{children}</h1>
-            {isFormOpen ? (
-                <Form onSubmit={handleSubmitForm} onCancel={handleCloseForm} initialValue="" />
-            ) : (
-                <Button aria-label="Add item" onClick={handleOpenForm} primary>
-                    <PlusIcon />
-                </Button>
-            )}
+            <ToggleableForm
+                isFormOpen={isFormOpen}
+                initialValue={""}
+                onClickOpen={handleOpenForm}
+                onSubmit={handleSubmitForm}
+                onCancel={handleCloseForm}
+                ariaLabelOpenButton="Add item"
+            >
+                <PlusIcon />
+            </ToggleableForm>
         </StyledDiv>
     );
 };
