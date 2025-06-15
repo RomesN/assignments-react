@@ -30,9 +30,7 @@ export const ToDoItems = () => {
                                 console.error("Not implemented");
                             }}
                             onItemLabelEdit={(label) => editItem({ ...itm, label })}
-                            onItemDoneToggle={(isDone) => {
-                                console.error("Not implemented", isDone);
-                            }}
+                            onItemDoneToggle={(isDone) => editItem({ ...itm, isDone })}
                         />
                     ))}
                 </List>
