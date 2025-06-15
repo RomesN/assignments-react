@@ -10,6 +10,10 @@ const StyledDiv = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
+
+    label {
+        margin-right: auto;
+    }
 `;
 
 const Label = styled.label`
