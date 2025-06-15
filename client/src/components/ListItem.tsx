@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Checkbox } from "./Checkbox";
 import { Form } from "./form";
-import { useFormToggle } from "./hooks/useFormToggle";
+import { useFormToggle } from "../hooks/useFormToggle";
 
 const StyledDiv = styled.div`
     display: flex;

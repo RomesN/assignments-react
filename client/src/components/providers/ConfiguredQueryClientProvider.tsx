@@ -1,5 +1,5 @@
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useAppErrors } from "../hooks/useAppErrors";
+import { useAppErrors } from "../../hooks/useAppErrors";
 import { useMemo } from "react";
 
 type ConfiguredQueryClientProviderProps = {
