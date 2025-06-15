@@ -9,6 +9,7 @@ const StyledDiv = styled.header`
 
     gap: 8px;
     align-items: center;
+    justify-content: space-between;
 
     button {
         ${(props) => getPrimaryButtonStyle(props.theme)}
