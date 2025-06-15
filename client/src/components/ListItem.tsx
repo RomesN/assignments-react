@@ -3,18 +3,13 @@ import styled from "styled-components";
 
 import { Checkbox } from "./Checkbox";
 import { Form } from "./form";
+import { Button } from "./Button";
 import { useFormToggle } from "../hooks/useFormToggle";
 
 const StyledDiv = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
-
-    button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 `;
 
 const Label = styled.label`
@@ -37,15 +32,15 @@ export const ListItem = (props: LiteeItemProp) => {
         <StyledDiv>
             <Checkbox checked={isDone} onCheckedChange={onItemDoneToggle} />
             <Label>{label}</Label>
-            <button onClick={() => onItemDelete()}>
+            <Button onClick={() => onItemDelete()}>
                 <TrashIcon />
-            </button>
+            </Button>
             {isFormOpen ? (
                 <Form initialValue={props.label} onSubmit={handleSubmitForm} onCancel={handleCloseForm} />
             ) : (
-                <button onClick={handleOpenForm}>
+                <Button onClick={handleOpenForm}>
                     <Pencil1Icon />
-                </button>
+                </Button>
             )}
         </StyledDiv>
     );
